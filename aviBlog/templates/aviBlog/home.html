@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title_block %}avi Blog{% endblock %}
+
+{% block css_files %}
+   <link rel= "stylesheet" href="{% static "aviBlog/home.css" %}">
+   <link rel= "stylesheet" href="{% static "aviBlog/post.css" %}">
+{% endblock %}
+
+{% block body_block %}
+
+   
+   <section id="welcome">
+      <header>
+         <img src="{% static 'aviBlog/images/POSE.jpg' %}" alt="Avinash Chauhan - The Author of this Blog">
+         <br>
+         <h2>AvinashChauhan's Blogs</h2>
+      </header>
+      <p>
+         Hey people!  I blog about aything you might not searching for 
+         but will find interesting.<br><br> 
+      </p>
+   </section>
+
+   <section id="latest-posts">
+      <h2>My Latest Posts</h2>
+
+      <ul>
+         {% for post in the_posts %}
+         {% include "aviBlog/includes/post.html" %}
+         {% endfor %}
+      </ul>
+   </section>
+
+   <section id= about>
+      <h2>What I do</h2>
+      <p>
+         I do what every other person do, But in a cool way!!
+      </p>
+      <p>
+         Personally, I might seem boring at first but give it sometime, I am the coolest person you will meet this year!!
+      </p>
+      
+   </section>
+{% endblock %}
