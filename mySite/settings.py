@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+from os import getenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ak*gtm8#+&(1%(giq^m**_lmofk#5@n*d_9@a_$hiz&e_u_w$n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    getenv("APP_HOST"),
+    "127.0.0.1"
+]
 
 
 # Application definition
@@ -132,3 +135,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR/"uploads"
 MEDIA_URL = "/files/"
+
+#EMAIL SETTINGS
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT='587'
+EMAIL_HOST_USER="chauhanavi737@gmail.com"
+EMAIL_HOST_PASSWORD='ioyjkusuqvcpnpat'
+EMAIL_USE_TLS= True 
+# EMAIL_USE_SSL=False

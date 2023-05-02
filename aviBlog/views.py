@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.views import View
 from django.urls import reverse
-
+from django.core.mail import send_mail
+from mySite import settings
 # from datetime import date
 from .forms import CommentForm
 
@@ -73,7 +74,18 @@ class SinglePostView(View):
         if comment_form.is_valid():
             comment=comment_form.save(commit=False)
             comment.post=post
-            comment.save()            
+            comment.save()
+
+            ##for mails
+            message="Thanks for Commenting!!"
+            send_mail(
+
+                comment_form.cleaned_data["user_name"],
+                message,
+                settings.EMAIL_HOST_USER,
+                [comment_form.cleaned_data["user_email"]],
+                fail_silently=False
+            )            
             return HttpResponseRedirect(reverse("post-detail-page", args=[slug]))
         context={
             "post":post,
